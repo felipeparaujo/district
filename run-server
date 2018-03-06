@@ -1,0 +1,3 @@
+javac -cp src src/felipe/district/techtest/Main.java -d out
+java -classpath out felipe.district.techtest.Main
+

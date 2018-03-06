@@ -4,8 +4,6 @@ import com.sun.net.httpserver.HttpExchange;
 import felipe.district.techtest.Entity.Task;
 
 import java.io.IOException;
-import java.net.URI;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class GetHandler extends MethodHandler{
@@ -14,13 +12,8 @@ public class GetHandler extends MethodHandler{
     }
 
     public HashMap<Integer, Task> handle(HashMap<Integer, Task> data) throws IOException {
-        URI uri = this.httpExchange.getRequestURI();
-        String[] route = uri.toString().split("/");
-        route = Arrays.stream(route)
-                .filter(s -> (s != null && s.length() > 0))
-                .toArray(String[]::new);
+        String[] route = this.getRoute();
 
-        System.out.println(Arrays.toString(route));
         if (route.length == 1) {
             this.handleGetAllTasks(data);
         } else if (route.length == 2) {
@@ -28,7 +21,7 @@ public class GetHandler extends MethodHandler{
                 int id = Integer.parseInt(route[1]);
                 this.handleGetTask(id, data);
             } catch (NumberFormatException exception) {
-                this.sendResponse(400, "Invalid ID");
+                this.throw400();
             }
         } else {
             this.throw404();
@@ -46,7 +39,13 @@ public class GetHandler extends MethodHandler{
             response.append(", ");
         }
 
+        // delete comma and space
+        response = response.deleteCharAt(response.length() - 1);
+        response = response.deleteCharAt(response.length() - 1);
+
         response.append("]");
+
+        System.out.println(response.toString());
 
         this.sendResponse(200, response.toString(), "application/json");
     }

@@ -33,10 +33,10 @@ public class Task {
 
     public String toJson() {
         return "{" +
-                    "id: \"" + this.id + "\", " +
-                    "title: \"" + this.title + "\", " +
-                    "description: \"" + this.description + "\", " +
-                    "dueDate: \"" + this.dueDate.toString() + "\"" +
+                    "\"id\": \"" + this.id + "\", " +
+                    "\"title\": \"" + this.title + "\", " +
+                    "\"description\": \"" + this.description + "\", " +
+                    "\"dueDate\": \"" + this.dueDate.toString() + "\"" +
                 "}";
     }
 }

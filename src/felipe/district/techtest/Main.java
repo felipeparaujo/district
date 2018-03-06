@@ -11,8 +11,8 @@ import felipe.district.techtest.Handlers.Tasks.TasksHandler;
 public class Main {
     public static void main(String[] args) throws Exception {
         HashMap<Integer, Task> data = new HashMap<>();
-        data.put(0, new Task(0, "title", "description", new Date()));
-        data.put(1, new Task(0, "title", "description", new Date()));
+        data.put(0, new Task(0, "Get Milk", "We ran out of milk!", new Date()));
+        data.put(1, new Task(0, "Get Eggs", "Let's bake a cake", new Date()));
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
         server.createContext("/tasks", new TasksHandler(data));
